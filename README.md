@@ -15,6 +15,6 @@ addig gurul, amíg falba vagy a pálya szélébe nem ütközik.
 
 ## Megvalósítás
 
-A program JavaFX grafikus felülettel rendelkezik.
+A program JavaFX grafikus felülettel rendelkezik. A stopperóra a 'javafx-stopwatch' órai, a pom pedig a 'homework-template-project' projekten alapszik.
 
 ___Folyamatban___

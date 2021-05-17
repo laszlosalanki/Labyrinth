@@ -20,7 +20,6 @@ import static javafx.animation.Animation.Status.RUNNING;
 
 public class LabyrinthGameController {
 
-    private Image back;
     private Timer timer;
 
     @FXML
@@ -100,8 +99,10 @@ public class LabyrinthGameController {
                     square.getStyleClass().add("border-topleft");
                 else if (i == 5 && j == 1)
                     square.getStyleClass().add("border-right");
-                else if (i == 5 && j == 2)
+                else if (i == 5 && j == 2) {
+                    square.getChildren().add(new Label("CÉL"));
                     square.getStyleClass().add("border-rightbottomleft");
+                }
                 else if (i == 5 && j == 3)
                     square.getStyleClass().add("border-left");
                 else if (i == 5 && j == 4)

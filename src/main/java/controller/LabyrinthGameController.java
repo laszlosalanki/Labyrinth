@@ -1,4 +1,4 @@
-package labyrinthgame.controller;
+package controller;
 
 import jakarta.xml.bind.JAXBException;
 import javafx.collections.ObservableList;
@@ -18,8 +18,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import labyrinthgame.Position;
 import labyrinthgame.Timer;
-import labyrinthgame.result.Result;
-import labyrinthgame.result.ResultBuilder;
+import result.Result;
+import result.ResultBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

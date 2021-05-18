@@ -1,4 +1,4 @@
-package labyrinthgame.result;
+package result;
 
 public class ResultBuilder {
 

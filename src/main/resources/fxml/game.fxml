@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="mainPane" minHeight="600.0" minWidth="800.0" onKeyPressed="#handleKeyEvent" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labyrinthgame.controller.LabyrinthGameController">
+<Pane fx:id="mainPane" minHeight="600.0" minWidth="800.0" onKeyPressed="#handleKeyEvent" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LabyrinthGameController">
    <children>
       <GridPane fx:id="gameGridPane" hgap="2.0" layoutX="150.0" layoutY="26.0" prefHeight="500.0" prefWidth="500.0" stylesheets="@../game.css" vgap="2.0" xmlns:fx="http://javafx.com/fxml/1">
         <columnConstraints>

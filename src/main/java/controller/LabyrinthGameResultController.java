@@ -1,4 +1,4 @@
-package labyrinthgame.controller;
+package controller;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -12,8 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import labyrinthgame.result.Result;
-import labyrinthgame.result.Results;
+import result.Result;
+import result.Results;
 
 import java.io.*;
 import java.util.List;

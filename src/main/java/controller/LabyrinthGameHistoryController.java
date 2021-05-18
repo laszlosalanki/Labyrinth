@@ -1,4 +1,4 @@
-package labyrinthgame.controller;
+package controller;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -11,11 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import labyrinthgame.result.Result;
-import labyrinthgame.result.Results;
+import result.Result;
+import result.Results;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class LabyrinthGameHistoryController {

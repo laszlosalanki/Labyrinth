@@ -323,7 +323,7 @@ public class LabyrinthGameController {
 
         mainPane.requestFocus();
 
-        logger.info("Default position restored, timer restarted.");
+        logger.info("Default position restored.");
     }
 
     @FXML

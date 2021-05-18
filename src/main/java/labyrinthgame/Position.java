@@ -5,13 +5,13 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-public class GameClass {
+public class Position {
 
     private final int x_pos;
     private final int y_pos;
     GridPane gameGridPane;
 
-    public GameClass(int x, int y, GridPane gameGridPane) {
+    public Position(int x, int y, GridPane gameGridPane) {
 
         x_pos = x;
         y_pos = y;

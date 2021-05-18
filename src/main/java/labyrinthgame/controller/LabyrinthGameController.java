@@ -15,8 +15,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import labyrinthgame.GameClass;
+import labyrinthgame.Position;
 import labyrinthgame.Timer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -26,6 +28,8 @@ public class LabyrinthGameController {
 
     private Timer timer;
     private Circle golyo;
+
+    private static Logger logger;
 
     @FXML
     private Button exitGameButton;
@@ -141,6 +145,8 @@ public class LabyrinthGameController {
     @FXML
     private void initialize() {
 
+        logger = LogManager.getLogger();
+
         golyo = new Circle(25.0f);
         golyo.setFill(Color.BLUE);
         mainPane.requestFocus();
@@ -158,9 +164,7 @@ public class LabyrinthGameController {
     @FXML
     private void handleKeyEvent(KeyEvent event) {
 
-        //TODO: log instead of println
-
-        System.out.println("Pressed key code: " + event.getCode());
+        logger.trace("Pressed key code: " + event.getCode());
 
         int r_idx;
         int c_idx;
@@ -171,7 +175,7 @@ public class LabyrinthGameController {
                 r_idx = GridPane.getRowIndex(golyo);
                 c_idx = GridPane.getColumnIndex(golyo);
 
-                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx-1, c_idx)) {
+                while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx-1, c_idx)) {
 
                     ObservableList<Node> childrens = gameGridPane.getChildren();
                     for (Node node : childrens) {
@@ -182,16 +186,17 @@ public class LabyrinthGameController {
                     }
 
                     gameGridPane.add(golyo, c_idx, r_idx-1);
-                    System.out.println("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx-1) + ", " + c_idx + ")");
+                    logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx-1) + ", " + c_idx + ")");
 
                     r_idx -= 1;
                 }
+                logger.trace("Can't go any further, because there's a wall in the way.");
                 break;
             case S:
                 r_idx = GridPane.getRowIndex(golyo);
                 c_idx = GridPane.getColumnIndex(golyo);
 
-                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx+1, c_idx)) {
+                while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx+1, c_idx)) {
 
                     ObservableList<Node> childrens = gameGridPane.getChildren();
                     for (Node node : childrens) {
@@ -202,15 +207,17 @@ public class LabyrinthGameController {
                     }
 
                     gameGridPane.add(golyo, c_idx, r_idx+1);
+                    logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx+1) + ", " + c_idx + ")");
 
                     r_idx += 1;
                 }
+                logger.trace("Can't go any further, because there's a wall in the way.");
                 break;
             case A:
                 r_idx = GridPane.getRowIndex(golyo);
                 c_idx = GridPane.getColumnIndex(golyo);
 
-                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx-1)) {
+                while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx-1)) {
 
                     ObservableList<Node> childrens = gameGridPane.getChildren();
                     for (Node node : childrens) {
@@ -221,15 +228,17 @@ public class LabyrinthGameController {
                     }
 
                     gameGridPane.add(golyo, c_idx-1, r_idx);
+                    logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + r_idx + ", " + (c_idx-1) + ")");
 
                     c_idx -= 1;
                 }
+                logger.trace("Can't go any further, because there's a wall in the way.");
                 break;
             case D:
                 r_idx = GridPane.getRowIndex(golyo);
                 c_idx = GridPane.getColumnIndex(golyo);
 
-                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx+1)) {
+                while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx+1)) {
 
                     ObservableList<Node> childrens = gameGridPane.getChildren();
                     for (Node node : childrens) {
@@ -240,9 +249,11 @@ public class LabyrinthGameController {
                     }
 
                     gameGridPane.add(golyo, c_idx+1, r_idx);
+                    logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + r_idx + ", " + (c_idx+1) + ")");
 
                     c_idx += 1;
                 }
+                logger.trace("Can't go any further, because there's a wall in the way.");
                 break;
             default:
                 break;
@@ -255,8 +266,9 @@ public class LabyrinthGameController {
             if (timer.getStatus() == RUNNING) {
                 timer.stop();
             }
-            //TODO: save result, log
-            System.out.println("Task completed in " + timer.hhmmssProperty().get());
+            //TODO: save result
+
+            logger.trace("Level completed in " + timer.hhmmssProperty().get());
         }
     }
 

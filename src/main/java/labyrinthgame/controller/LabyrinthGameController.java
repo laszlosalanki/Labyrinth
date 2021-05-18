@@ -1,17 +1,21 @@
 package labyrinthgame.controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import labyrinthgame.GameClass;
 import labyrinthgame.Timer;
 
 import java.io.IOException;
@@ -21,9 +25,10 @@ import static javafx.animation.Animation.Status.RUNNING;
 public class LabyrinthGameController {
 
     private Timer timer;
+    private Circle golyo;
 
     @FXML
-    private Button exitGameButton, rulesButton;
+    private Button exitGameButton;
 
     @FXML
     private Label timerLabel, playerLabel;
@@ -31,7 +36,10 @@ public class LabyrinthGameController {
     @FXML
     private GridPane gameGridPane;
 
-    private void drawmap() {
+    @FXML
+    private Pane mainPane;
+
+    private void drawMap() {
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -56,10 +64,10 @@ public class LabyrinthGameController {
                 else if (i == 1 && j == 2)
                     square.getStyleClass().add("border-top");
                 else if (i == 1 && j == 4) {
-                    var golyo = new Circle(25.0f);
-                    golyo.setFill(Color.BLUE);
-                    square.getChildren().add(golyo);
+                    //var golyo = new Circle(25.0f);
+                    //square.getChildren().add(golyo);
                     square.getStyleClass().add("border-all");
+                    gameGridPane.add(golyo, j, i);
                 }
                 else if (i == 1 && j == 6)
                     square.getStyleClass().add("border-topright");
@@ -133,7 +141,11 @@ public class LabyrinthGameController {
     @FXML
     private void initialize() {
 
-        drawmap();
+        golyo = new Circle(25.0f);
+        golyo.setFill(Color.BLUE);
+        mainPane.requestFocus();
+
+        drawMap();
 
         timer = new Timer();
         timerLabel.textProperty().bind(timer.hhmmssProperty());
@@ -141,6 +153,111 @@ public class LabyrinthGameController {
 
         playerLabel.textProperty().set(System.getProperty("user.name"));
 
+    }
+
+    @FXML
+    private void handleKeyEvent(KeyEvent event) {
+
+        //TODO: log instead of println
+
+        System.out.println("Pressed key code: " + event.getCode());
+
+        int r_idx;
+        int c_idx;
+
+        switch (event.getCode()) {
+
+            case W:
+                r_idx = GridPane.getRowIndex(golyo);
+                c_idx = GridPane.getColumnIndex(golyo);
+
+                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx-1, c_idx)) {
+
+                    ObservableList<Node> childrens = gameGridPane.getChildren();
+                    for (Node node : childrens) {
+                        if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
+                            gameGridPane.getChildren().remove(node);
+                            break;
+                        }
+                    }
+
+                    gameGridPane.add(golyo, c_idx, r_idx-1);
+                    System.out.println("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx-1) + ", " + c_idx + ")");
+
+                    r_idx -= 1;
+                }
+                break;
+            case S:
+                r_idx = GridPane.getRowIndex(golyo);
+                c_idx = GridPane.getColumnIndex(golyo);
+
+                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx+1, c_idx)) {
+
+                    ObservableList<Node> childrens = gameGridPane.getChildren();
+                    for (Node node : childrens) {
+                        if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
+                            gameGridPane.getChildren().remove(node);
+                            break;
+                        }
+                    }
+
+                    gameGridPane.add(golyo, c_idx, r_idx+1);
+
+                    r_idx += 1;
+                }
+                break;
+            case A:
+                r_idx = GridPane.getRowIndex(golyo);
+                c_idx = GridPane.getColumnIndex(golyo);
+
+                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx-1)) {
+
+                    ObservableList<Node> childrens = gameGridPane.getChildren();
+                    for (Node node : childrens) {
+                        if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
+                            gameGridPane.getChildren().remove(node);
+                            break;
+                        }
+                    }
+
+                    gameGridPane.add(golyo, c_idx-1, r_idx);
+
+                    c_idx -= 1;
+                }
+                break;
+            case D:
+                r_idx = GridPane.getRowIndex(golyo);
+                c_idx = GridPane.getColumnIndex(golyo);
+
+                while (new GameClass(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx+1)) {
+
+                    ObservableList<Node> childrens = gameGridPane.getChildren();
+                    for (Node node : childrens) {
+                        if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
+                            gameGridPane.getChildren().remove(node);
+                            break;
+                        }
+                    }
+
+                    gameGridPane.add(golyo, c_idx+1, r_idx);
+
+                    c_idx += 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+        r_idx = GridPane.getRowIndex(golyo);
+        c_idx = GridPane.getColumnIndex(golyo);
+
+        if (r_idx == 5 && c_idx == 2) {
+            if (timer.getStatus() == RUNNING) {
+                timer.stop();
+            }
+            //TODO: save result, log
+            System.out.println("Task completed in " + timer.hhmmssProperty().get());
+        }
     }
 
     @FXML

@@ -13,8 +13,6 @@ addig gurul, amíg falba vagy a pálya szélébe nem ütközik.
 
 ![21. ábra](feladat_abra.png "21. ábra")
 
-## Megvalósítás
+## Megjegyzések
 
-A program JavaFX grafikus felülettel rendelkezik. A stopperóra a 'javafx-stopwatch' órai, a pom pedig a 'homework-template-project' projekten alapszik.
-
-___Folyamatban___
+A stopperóra a 'javafx-stopwatch' órai, a pom pedig a 'homework-template-project' projekten alapszik.

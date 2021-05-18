@@ -3,14 +3,14 @@ package labyrinthgame.result;
 public class ResultBuilder {
 
     private String username;
-    private String time_s;
+    private Long time_s;
     private int steps;
 
     public ResultBuilder() {
 
     }
 
-    public ResultBuilder(String username, String time_s, int steps) {
+    public ResultBuilder(String username, Long time_s, int steps) {
         this.username = username;
         this.time_s = time_s;
         this.steps = steps;
@@ -21,7 +21,7 @@ public class ResultBuilder {
         return this;
     }
 
-    public ResultBuilder setTime_s(String time_s) {
+    public ResultBuilder setTime_s(Long time_s) {
         this.time_s = time_s;
         return this;
     }

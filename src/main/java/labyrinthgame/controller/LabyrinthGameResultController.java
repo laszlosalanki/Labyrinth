@@ -20,7 +20,8 @@ import java.util.List;
 
 public class LabyrinthGameResultController {
 
-    private String username, time;
+    private String username;
+    private Long time;
     private int steps;
 
     @FXML
@@ -33,7 +34,7 @@ public class LabyrinthGameResultController {
     private void initialize() {
         Platform.runLater(() -> {
             userResultLabel.setText(username);
-            timeResultLabel.setText(time);
+            timeResultLabel.setText(time + "s");
             stepsResultLabel.setText(String.valueOf(steps));
         });
     }
@@ -46,13 +47,13 @@ public class LabyrinthGameResultController {
         File historyFile = new File(LabyrinthGameResultController.class.getResource("/history.xml").getFile());
         JAXBContext jaxbContext = JAXBContext.newInstance(Results.class);
         if (historyFile.length() != 0) {
-            //READ
+
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             Results results = (Results) unmarshaller.unmarshal(historyFile);
             List<Result> resultList = results.getResults();
             resultList.add(r);
             results.setResults(resultList);
-            //WRITE
+
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");

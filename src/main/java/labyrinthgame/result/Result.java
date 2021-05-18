@@ -7,14 +7,14 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class Result {
 
     private String username;
-    private String time_s;
+    private Long time_s;
     private int steps;
 
     public Result(){
 
     }
 
-    public Result( String username, String time_s, int steps) {
+    public Result( String username, Long time_s, int steps) {
         super();
         this.username = username;
         this.time_s = time_s;
@@ -31,11 +31,11 @@ public class Result {
     }
 
     @XmlElement
-    public String getTime_s() {
+    public Long getTime_s() {
         return time_s;
     }
 
-    public void setTime_s(String time_s) {
+    public void setTime_s(Long time_s) {
         this.time_s = time_s;
     }
 

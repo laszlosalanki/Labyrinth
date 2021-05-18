@@ -158,7 +158,7 @@ public class LabyrinthGameController {
 
         timer = new Timer();
         timerLabel.textProperty().bind(timer.hhmmssProperty());
-        timer.start();
+        //timer.start();
 
         playerLabel.textProperty().set(System.getProperty("user.name"));
 
@@ -166,6 +166,11 @@ public class LabyrinthGameController {
 
     @FXML
     private void handleKeyEvent(KeyEvent event) throws IOException, JAXBException {
+
+        if (timer.getStatus() != RUNNING) {
+            timer.start();
+            logger.info("Timer started.");
+        }
 
         logger.trace("Pressed key code: " + event.getCode());
 
@@ -274,7 +279,7 @@ public class LabyrinthGameController {
             logger.info("Level completed in " + timer.hhmmssProperty().get());
             logger.info("Steps: " + steps);
 
-            Result r = new ResultBuilder().setUsername(playerLabel.textProperty().get()).setTime_s(timer.hhmmssProperty().get()).setSteps(steps).buid();
+            Result r = new ResultBuilder().setUsername(playerLabel.textProperty().get()).setTime_s(timer.secondsProperty().get()).setSteps(steps).buid();
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/result.fxml"));
             Parent resultParent = fxmlLoader.load();
@@ -303,7 +308,6 @@ public class LabyrinthGameController {
 
     @FXML
     private void resetButtonClick() {
-        //steps = 0;
 
         int r_idx = GridPane.getRowIndex(golyo);
         int c_idx = GridPane.getColumnIndex(golyo);
@@ -316,10 +320,6 @@ public class LabyrinthGameController {
             }
         }
         gameGridPane.add(golyo, 4, 1);
-
-        /*timer.stop();
-        timer.reset();
-        timer.start();*/
 
         mainPane.requestFocus();
 

@@ -17,6 +17,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import labyrinthgame.Position;
 import labyrinthgame.Timer;
+import labyrinthgame.result.Result;
+import labyrinthgame.result.ResultBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,6 +30,7 @@ public class LabyrinthGameController {
 
     private Timer timer;
     private Circle golyo;
+    private int steps;
 
     private static Logger logger;
 
@@ -146,6 +149,7 @@ public class LabyrinthGameController {
     private void initialize() {
 
         logger = LogManager.getLogger();
+        steps = 0;
 
         golyo = new Circle(25.0f);
         golyo.setFill(Color.BLUE);
@@ -162,7 +166,7 @@ public class LabyrinthGameController {
     }
 
     @FXML
-    private void handleKeyEvent(KeyEvent event) {
+    private void handleKeyEvent(KeyEvent event) throws IOException {
 
         logger.trace("Pressed key code: " + event.getCode());
 
@@ -187,10 +191,10 @@ public class LabyrinthGameController {
 
                     gameGridPane.add(golyo, c_idx, r_idx-1);
                     logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx-1) + ", " + c_idx + ")");
-
                     r_idx -= 1;
                 }
                 logger.trace("Can't go any further, because there's a wall in the way.");
+                steps++;
                 break;
             case S:
                 r_idx = GridPane.getRowIndex(golyo);
@@ -208,10 +212,10 @@ public class LabyrinthGameController {
 
                     gameGridPane.add(golyo, c_idx, r_idx+1);
                     logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + (r_idx+1) + ", " + c_idx + ")");
-
                     r_idx += 1;
                 }
                 logger.trace("Can't go any further, because there's a wall in the way.");
+                steps++;
                 break;
             case A:
                 r_idx = GridPane.getRowIndex(golyo);
@@ -229,10 +233,10 @@ public class LabyrinthGameController {
 
                     gameGridPane.add(golyo, c_idx-1, r_idx);
                     logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + r_idx + ", " + (c_idx-1) + ")");
-
                     c_idx -= 1;
                 }
                 logger.trace("Can't go any further, because there's a wall in the way.");
+                steps++;
                 break;
             case D:
                 r_idx = GridPane.getRowIndex(golyo);
@@ -250,10 +254,10 @@ public class LabyrinthGameController {
 
                     gameGridPane.add(golyo, c_idx+1, r_idx);
                     logger.trace("Moved from (" + r_idx + ", " + c_idx + ") " + "to (" + r_idx + ", " + (c_idx+1) + ")");
-
                     c_idx += 1;
                 }
                 logger.trace("Can't go any further, because there's a wall in the way.");
+                steps++;
                 break;
             default:
                 break;
@@ -266,9 +270,20 @@ public class LabyrinthGameController {
             if (timer.getStatus() == RUNNING) {
                 timer.stop();
             }
-            //TODO: save result
 
-            logger.trace("Level completed in " + timer.hhmmssProperty().get());
+            logger.info("Solver: " + playerLabel.textProperty().get());
+            logger.info("Level completed in " + timer.hhmmssProperty().get());
+            logger.info("Steps: " + steps);
+
+            Result r = new ResultBuilder().setUsername(playerLabel.textProperty().get()).setTime_s(timer.hhmmssProperty().get()).setSteps(steps).buid();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/result.fxml"));
+            Parent resultParent = fxmlLoader.load();
+            LabyrinthGameResultController controller = fxmlLoader.<LabyrinthGameResultController>getController();
+            controller.setData(r);
+            Stage resultStage = (Stage) exitGameButton.getScene().getWindow();
+            Scene resultScene = new Scene(resultParent);
+            resultStage.setScene(resultScene);
         }
     }
 

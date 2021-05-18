@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +14,16 @@ public class LabyrinthGameHistoryController {
 
     @FXML
     private Button backButton;
+
+    @FXML
+    private Label bestTimeLabel;
+
+    @FXML
+    private void initialize() {
+
+        //TODO: load data and select the best
+
+    }
 
     @FXML
     private void backButtonClick() throws IOException {

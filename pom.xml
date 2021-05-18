@@ -7,11 +7,11 @@
     <artifactId>labyrinth</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <description></description>
+    <description>This is a homework game for INBPM0420L-03.</description>
     <developers>
         <developer>
             <name>Laszlo Salanki</name>
-            <email></email>
+            <email>laszlosalanki2001@gmail.com</email>
             <organization>Faculty of Informatics, University of Debrecen</organization>
             <organizationUrl>https://inf.unideb.hu/</organizationUrl>
         </developer>
@@ -30,14 +30,9 @@
         <surefire.version>3.0.0-M5</surefire.version>
         <slf4j.version>1.7.30</slf4j.version>
         <log4j.version>2.14.0</log4j.version>
+        <json.version>20210307</json.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -80,6 +75,11 @@
             <version>${log4j.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -87,18 +87,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.20.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>delombok</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -188,7 +176,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
+                    <configLocation>/fxml/checkstyle.xml</configLocation>
                 </configuration>
             </plugin>
             <plugin>

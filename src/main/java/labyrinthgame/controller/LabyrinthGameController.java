@@ -1,5 +1,6 @@
 package labyrinthgame.controller;
 
+import jakarta.xml.bind.JAXBException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -164,7 +165,7 @@ public class LabyrinthGameController {
     }
 
     @FXML
-    private void handleKeyEvent(KeyEvent event) throws IOException {
+    private void handleKeyEvent(KeyEvent event) throws IOException, JAXBException {
 
         logger.trace("Pressed key code: " + event.getCode());
 
@@ -302,7 +303,7 @@ public class LabyrinthGameController {
 
     @FXML
     private void resetButtonClick() {
-        steps = 0;
+        //steps = 0;
 
         int r_idx = GridPane.getRowIndex(golyo);
         int c_idx = GridPane.getColumnIndex(golyo);
@@ -316,9 +317,9 @@ public class LabyrinthGameController {
         }
         gameGridPane.add(golyo, 4, 1);
 
-        timer.stop();
+        /*timer.stop();
         timer.reset();
-        timer.start();
+        timer.start();*/
 
         mainPane.requestFocus();
 

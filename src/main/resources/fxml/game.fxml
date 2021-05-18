@@ -35,5 +35,6 @@
       <Label fx:id="timerLabel" layoutX="29.0" layoutY="65.0" text="Idő" />
       <Label layoutX="711.0" layoutY="35.0" text="Játékos:" />
       <Label fx:id="playerLabel" layoutX="711.0" layoutY="65.0" text="Játékos" />
+      <Button fx:id="resetButton" layoutX="29.0" layoutY="468.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="83.0" text="Alaphelyzet" onAction="#resetButtonClick"/>
    </children>
 </Pane>

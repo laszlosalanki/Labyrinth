@@ -71,8 +71,6 @@ public class LabyrinthGameController {
                 else if (i == 1 && j == 2)
                     square.getStyleClass().add("border-top");
                 else if (i == 1 && j == 4) {
-                    //var golyo = new Circle(25.0f);
-                    //square.getChildren().add(golyo);
                     square.getStyleClass().add("border-all");
                     gameGridPane.add(golyo, j, i);
                 }
@@ -293,8 +291,6 @@ public class LabyrinthGameController {
         if (timer.getStatus() == RUNNING)
         {
             timer.stop();
-
-            //TODO: save result
         }
 
         Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
@@ -302,6 +298,31 @@ public class LabyrinthGameController {
         Scene mainScene = new Scene(mainParent);
         mainStage.setScene(mainScene);
 
+    }
+
+    @FXML
+    private void resetButtonClick() {
+        steps = 0;
+
+        int r_idx = GridPane.getRowIndex(golyo);
+        int c_idx = GridPane.getColumnIndex(golyo);
+
+        ObservableList<Node> childrens = gameGridPane.getChildren();
+        for (Node node : childrens) {
+            if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
+                gameGridPane.getChildren().remove(node);
+                break;
+            }
+        }
+        gameGridPane.add(golyo, 4, 1);
+
+        timer.stop();
+        timer.reset();
+        timer.start();
+
+        mainPane.requestFocus();
+
+        logger.info("Default position restored, timer restarted.");
     }
 
     @FXML

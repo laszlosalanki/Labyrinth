@@ -299,7 +299,8 @@ public class LabyrinthGameController {
             timer.stop();
         }
 
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent mainParent = fxmlLoader.load();
         Stage mainStage = (Stage) exitGameButton.getScene().getWindow();
         Scene mainScene = new Scene(mainParent);
         mainStage.setScene(mainScene);
@@ -330,7 +331,8 @@ public class LabyrinthGameController {
     private void rulesButtonClick() throws IOException {
 
         Stage rulesStage = new Stage();
-        Parent rulesParent = FXMLLoader.load(getClass().getResource("/fxml/rules.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/rules.fxml"));
+        Parent rulesParent = fxmlLoader.load();
         Scene rulesScene = new Scene(rulesParent);
         rulesStage.setScene(rulesScene);
         rulesStage.show();

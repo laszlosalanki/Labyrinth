@@ -73,7 +73,8 @@ public class LabyrinthGameResultController {
     @FXML
     private void mainMenuButtonClick() throws IOException {
 
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent mainParent = fxmlLoader.load();
         Stage mainStage = (Stage) mainMenuResultButton.getScene().getWindow();
         Scene mainScene = new Scene(mainParent);
         mainStage.setScene(mainScene);

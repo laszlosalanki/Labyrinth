@@ -21,7 +21,8 @@ public class LabyrinthGameMainController {
     @FXML
     private void newGameButtonClick() throws IOException {
 
-        Parent newGameParent = FXMLLoader.load(getClass().getResource("/fxml/game.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/game.fxml"));
+        Parent newGameParent = fxmlLoader.load();
         Stage newGameStage = (Stage) newGameButton.getScene().getWindow();
         Scene newGameScene = new Scene(newGameParent);
         newGameStage.setScene(newGameScene);
@@ -31,7 +32,8 @@ public class LabyrinthGameMainController {
     @FXML
     private void historyButtonClick() throws IOException {
 
-        Parent historyParent = FXMLLoader.load(getClass().getResource("/fxml/history.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/history.fxml"));
+        Parent historyParent = fxmlLoader.load();
         Stage historyStage = (Stage) historyButton.getScene().getWindow();
         Scene historyScene = new Scene(historyParent);
         historyStage.setScene(historyScene);
@@ -41,7 +43,6 @@ public class LabyrinthGameMainController {
     @FXML
     private void exitButtonClick() {
 
-        //TODO
         Stage mainStage = (Stage) exitButton.getScene().getWindow();
         mainStage.close();
 

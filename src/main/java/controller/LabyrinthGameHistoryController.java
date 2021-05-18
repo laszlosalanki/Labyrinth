@@ -16,7 +16,6 @@ import result.Results;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 public class LabyrinthGameHistoryController {
@@ -90,7 +89,8 @@ public class LabyrinthGameHistoryController {
     @FXML
     private void backButtonClick() throws IOException {
 
-        Parent mainParent = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent mainParent = fxmlLoader.load();
         Stage mainStage = (Stage) backButton.getScene().getWindow();
         Scene mainScene = new Scene(mainParent);
         mainStage.setScene(mainScene);

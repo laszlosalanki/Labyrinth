@@ -185,8 +185,8 @@ public class LabyrinthGameController {
 
                 while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx-1, c_idx)) {
 
-                    ObservableList<Node> childrens = gameGridPane.getChildren();
-                    for (Node node : childrens) {
+                    ObservableList<Node> children = gameGridPane.getChildren();
+                    for (Node node : children) {
                         if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
                             gameGridPane.getChildren().remove(node);
                             break;
@@ -206,8 +206,8 @@ public class LabyrinthGameController {
 
                 while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx+1, c_idx)) {
 
-                    ObservableList<Node> childrens = gameGridPane.getChildren();
-                    for (Node node : childrens) {
+                    ObservableList<Node> children = gameGridPane.getChildren();
+                    for (Node node : children) {
                         if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
                             gameGridPane.getChildren().remove(node);
                             break;
@@ -227,8 +227,8 @@ public class LabyrinthGameController {
 
                 while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx-1)) {
 
-                    ObservableList<Node> childrens = gameGridPane.getChildren();
-                    for (Node node : childrens) {
+                    ObservableList<Node> children = gameGridPane.getChildren();
+                    for (Node node : children) {
                         if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
                             gameGridPane.getChildren().remove(node);
                             break;
@@ -248,8 +248,8 @@ public class LabyrinthGameController {
 
                 while (new Position(r_idx, c_idx, gameGridPane).canGoTo(r_idx, c_idx+1)) {
 
-                    ObservableList<Node> childrens = gameGridPane.getChildren();
-                    for (Node node : childrens) {
+                    ObservableList<Node> children = gameGridPane.getChildren();
+                    for (Node node : children) {
                         if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
                             gameGridPane.getChildren().remove(node);
                             break;
@@ -313,8 +313,8 @@ public class LabyrinthGameController {
         int r_idx = GridPane.getRowIndex(golyo);
         int c_idx = GridPane.getColumnIndex(golyo);
 
-        ObservableList<Node> childrens = gameGridPane.getChildren();
-        for (Node node : childrens) {
+        ObservableList<Node> children = gameGridPane.getChildren();
+        for (Node node : children) {
             if (node instanceof Circle && GridPane.getRowIndex(node) == r_idx && GridPane.getColumnIndex(node) == c_idx) {
                 gameGridPane.getChildren().remove(node);
                 break;
